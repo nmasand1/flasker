@@ -1,0 +1,9 @@
+{
+    "files": [
+        {"file1": "~/Desktop/comparator_flask/csv1.csv"},
+        {"file2": "~/Desktop/comparator_flask/csv2.csv"}
+    ],
+    "columns": ["uti"],
+    "data_start_row": [0, 0],
+    "order": 1
+}
