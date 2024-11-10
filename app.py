@@ -1,3 +1,5 @@
+
+
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory
 import os
 from werkzeug.utils import secure_filename
@@ -16,6 +18,12 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    description = (
+        "This tool allows you to upload two CSV files for comparison. "
+        "Supported files are in .csv format, with options to specify the start row for data and columns to compare. "
+        "You can also choose the comparison order to control which file is prioritized in the comparison."
+    )
+
     if request.method == 'POST':
         # Get files and form data
         csv1_file = request.files.get('csv1_file')
@@ -41,7 +49,7 @@ def upload_file():
         generated_files = ['matching_rows.csv', 'non_matching_rows.csv', 'comparison_stats.csv']
         return render_template('results.html', files=generated_files)
 
-    return render_template('upload.html')
+    return render_template('upload.html', description=description)
 
 @app.route('/downloads/<path:filename>', methods=['GET'])
 def download_file(filename):
