@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,60 +13,9 @@
     </div>
     
     <div class="container">
-        <h2>Upload CSV Files and Configuration</h2>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
-        <form method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="yml_file">YAML Configuration File:</label>
-                <input type="file" name="yml_file" required class="form-control">
-            </div>
-            
-            <div class="form-group">
-                <label for="csv_files">Upload CSV Files (you can select multiple):</label>
-                <input type="file" name="csv_files" multiple required class="form-control">
-            </div>
+        <h2>Upload CSV Files</h2>
 
-            <button type="submit" class="btn">Upload</button>
-        </form>
-    </div>
-
-    <footer>
-        &copy; <span id="currentYear"></span> Barclays. All rights reserved.
-    </footer>
-
-    <script>
-        // Set current year for footer
-        document.getElementById("currentYear").innerText = new Date().getFullYear();
-    </script>
-</body>
-</html> -->
-
-
-
-<<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Comparison Tool</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="header">
-        <img src="{{ url_for('static', filename='barclayslogo.png') }}" alt="Barclays Logo" class="logo">
-        <h1>CSV Comparison Tool</h1>
-    </div>
-    
-    <div class="container">
-        <h2>Upload CSV Files and Configuration</h2>
+        <p>Please upload two CSV files for comparison. Ensure only CSV files are uploaded.</p>
 
         {% if error_message %}
             <div class="alert alert-danger">{{ error_message }}</div>
@@ -74,16 +23,39 @@
 
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="yml_file">YAML Configuration File:</label>
-                <input type="file" name="yml_file" required class="form-control">
-            </div>
-            
-            <div class="form-group">
-                <label for="csv_files">Upload CSV Files (you can select multiple):</label>
-                <input type="file" name="csv_files" multiple required class="form-control">
+                <label for="csv1_file">Upload CSV 1:</label>
+                <input type="file" name="csv1_file" required class="form-control">
             </div>
 
-            <button type="submit" class="btn">Upload</button>
+            <div class="form-group">
+                <label for="csv2_file">Upload CSV 2:</label>
+                <input type="file" name="csv2_file" required class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="columns">Columns to Compare (comma-separated):</label>
+                <input type="text" name="columns" required class="form-control" placeholder="e.g., Column1, Column2">
+            </div>
+
+            <div class="form-group">
+                <label for="data_start_row_csv1">Data Start Row (CSV 1):</label>
+                <input type="number" name="data_start_row_csv1" class="form-control" placeholder="Enter row number">
+            </div>
+
+            <div class="form-group">
+                <label for="data_start_row_csv2">Data Start Row (CSV 2):</label>
+                <input type="number" name="data_start_row_csv2" class="form-control" placeholder="Enter row number">
+            </div>
+
+            <div class="form-group">
+                <label for="order">Comparison Order:</label>
+                <select name="order" class="form-control">
+                    <option value="1">CSV 1 against CSV 2</option>
+                    <option value="2">CSV 2 against CSV 1</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Upload and Compare</button>
         </form>
     </div>
 
@@ -92,8 +64,8 @@
     </footer>
 
     <script>
-        // Set current year for footer
         document.getElementById("currentYear").innerText = new Date().getFullYear();
     </script>
 </body>
 </html>
+
